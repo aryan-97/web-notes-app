@@ -407,6 +407,28 @@ noteList = null;
 
 function deleteButton(id) {
     console.log(`Delete button pressed ${id}.`);
+    id = UiUtils.getIdFromComponentId(id);
+    let note = noteList.getNote(id);
+    if (note) {
+        if (confirm(`Deleting ${note.title}. It will be unrecoverable. Are you sure?`)) {
+            Cards.removeAll(noteList); // need to add because deleteNote remove it from noteList then refresh() doesn't find it there to remove it.
+            noteList.deleteNote(note);
+            if (currentId === parseInt(id)) {
+                console.log(`Card deleted was active card. Selecting top card as active...`);
+                let topNoteId = noteList.getLastNoteId();
+                cardClick("Note-" + topNoteId);
+            } else {
+                console.log(`Trying to set current note as active again.`);
+                cardClick("Note-" + currentId);
+            }
+        } else {
+            console.log(`Delete operation declined by the user.`);
+            return;
+        }
+    } else {
+        console.log(`Note to delete was not found in the list.`);
+        return;
+    }
 
 }
 
@@ -442,8 +464,6 @@ function saveButton() {
     note.setTitle(noteTitle);
     note.setContent(noteContent);
     note.setTime(noteTime);
-
-    console.log(note);
 
     noteList.updateNote(note);
     Cards.refresh(noteList);
@@ -529,18 +549,3 @@ function deleteNoteFromButton(buttonId) {
     }
     
 }
-
-// TODO; Only delete button is left now...
-
-
-// TODO  [DONE - TESTING NEED]
-// selected note delete, need to reset a note id and clear the inputs
-// unselected note can be deleted normally.
-
-/*
-[{"id":1,"title":"Changed note 2 title","content":"This is note 2. changing 2","time":"14/7/2021, 8:54:43 pm"},{"id":2,"title":"Changed note 2 title...","content":"This is note 2. changing 2 again","time":"14/7/2021, 9:21:58 pm"},{"id":4,"title":"Changed note 2 title...","content":"This is note 2. changing 2 again\n[{\"id\":1,\"title\":\"Changed note 2 title\",\"content\":\"This is note 2. changing 2\",\"time\":\"14/7/2021, 8:54:43 pm\"},{\"id\":2,\"title\":\"Changed note 2 title...\",\"content\":\"This is note 2. changing 2 again\",\"time\":\"14/7/2021, 9:21:58 pm\"},{\"id\":3,\"title\":\"Changed note 2 title\",\"content\":\"This is note 2. changing 2\",\"time\":\"14/7/2021, 8:54:43 pm\"},{\"id\":4,\"title\":\"Changed note 2 title...\",\"content\":\"This is note 2. changing 2 again\",\"time\":\"14/7/2021, 9:21:58 pm\"}]","time":"14/7/2021, 10:34:35 pm"},{"id":3,"title":"Backup","content":"[{\"id\":1,\"title\":\"Changed note 2 title\",\"content\":\"This is note 2. changing 2\",\"time\":\"14/7/2021, 8:54:43 pm\"},{\"id\":2,\"title\":\"Changed note 2 title...\",\"content\":\"This is note 2. changing 2 again\",\"time\":\"14/7/2021, 9:21:58 pm\"},{\"id\":3,\"title\":\"Changed note 2 title\",\"content\":\"This is note 2. changing 2\",\"time\":\"14/7/2021, 8:54:43 pm\"},{\"id\":4,\"title\":\"Changed note 2 title...\",\"content\":\"This is note 2. changing 2 again\",\"time\":\"14/7/2021, 9:21:58 pm\"}]","time":"14/7/2021, 10:34:52 pm"}]
-*/
-
-/* TODO:
-instead of selecting last note by largest id, select last note by last record in delete case note not found.
-*/
