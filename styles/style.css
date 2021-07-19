@@ -1,0 +1,147 @@
+.cardId {
+    font-size: smaller;
+    color:rgb(175, 175, 175);
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 2px;
+    background-color: #0000ff;
+}
+
+.topbar h1 {
+    color: white;
+}
+
+.topbar button {
+    color: white;
+    background-color: #0000ff;
+    border-left-color: white;
+    min-width: 10%;
+    border-style: none;
+}
+
+.topbar button:hover {
+    background: black;
+}
+
+.topbar button:active {
+    background: rgb(32, 32, 32);
+}
+
+.noteInputCol {
+    background-color: rgb(32, 32, 32);
+}
+
+#noteTitleField {
+    background-color: rgb(32, 32, 32);
+    color: rgb(224, 224, 224);
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    border-radius: 0%;
+}
+
+#noteTitleField:focus {
+    box-shadow: none;
+}
+
+#noteTextArea {
+    background-color: rgb(32, 32, 32);
+    color: rgb(224, 224, 224);
+    height: 90ch;
+    
+    resize: none;
+
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+}
+
+#noteTextArea:focus {
+    box-shadow: none;
+}
+
+.noteListCol {
+    background-color: rgb(32, 32, 32);
+    border-left-style: solid;
+    border-left-color: white;
+    border-left-width: 1px;
+}
+
+.noteCard {
+
+    -webkit-user-select: none;  
+    -moz-user-select: none;    
+    -ms-user-select: none;      
+    user-select: none;
+
+    padding: 5px;
+    background-color: rgb(32, 32, 32);
+    border-radius: 1rem;
+    border-color: white;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.noteCardActive {
+
+    -webkit-user-select: none;  
+    -moz-user-select: none;    
+    -ms-user-select: none;      
+    user-select: none;
+
+    padding: 5px;
+    background-color: #0000ff;
+    border-radius: 1rem;
+    border-color: white;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.noteCard:hover {
+    background-color: rgb(45, 45, 45);
+}
+
+.noteCard:active {
+    border-color: #0d6efd;
+}
+
+.noteCardTitle {
+    color: white;
+    font-weight: bold;
+    padding-left: 1%;
+}
+
+.noteCardDesc {
+    color: rgb(224, 224, 224);
+    padding: 1%;
+}
+
+.noteCardDate {
+    color: rgb(224, 224, 224);
+    padding: 1%;
+    font-size: small;
+    font-style: italic;
+}
+
+.delete-button {
+    color: rgb(224, 224, 224);
+    font-size: smaller;
+    border-style: solid;
+    border-width: 2px;
+    border-color: white;
+    border-radius: 1rem;
+}
+
+.delete-button:hover {
+    color: rgb(224, 224, 224);
+    background-color: red;
+}
+
+.delete-icon {
+    width: 1%;
+    height: 1%;
+}
