@@ -4,7 +4,7 @@ addEventListener('DOMContentLoaded', main);
 
 
 let currentId = -1;
-
+let unsavedChanges = 0;
 
 
 class Note {
@@ -433,6 +433,16 @@ function deleteButton(id) {
 }
 
 function cardClick(id) {
+    if (unsavedChanges == 1) {
+        console.log(`Unsaved changes found.`);
+        if (confirm(`Unsaved changes will be lost. Do you want to proceed?`)) {
+            console.log(`User allow to continue.`);
+        } else {
+            console.log(`User declined. Returning...`);
+            return;
+        }
+    }
+    unsavedChanges = 0;
     id = UiUtils.getIdFromComponentId(id);
     console.log(`Card for note#${id} clicked.`);
     currentId = parseInt(id);
@@ -466,6 +476,7 @@ function saveButton() {
     note.setTime(noteTime);
 
     noteList.updateNote(note);
+    unsavedChanges = 0;
     Cards.refresh(noteList);
     Cards.setActive(note, noteList);
 
@@ -473,6 +484,16 @@ function saveButton() {
 
 
 function newNoteButton() {
+    if (unsavedChanges == 1) {
+        console.log(`Unsaved changes found.`);
+        if (confirm(`Unsaved changes will be lost. Do you want to proceed?`)) {
+            console.log(`User allow to continue.`);
+        } else {
+            console.log(`User declined. Returning...`);
+            return;
+        }
+    }
+    unsavedChanges = 0;
     console.log(`Creating new note.`);
     UiUtils.setTitle(``);
     UiUtils.setContent(``);
@@ -488,64 +509,10 @@ function main() {
     
     document.getElementById(`save-button`).addEventListener(`click`, saveButton, false);
     document.getElementById(`newNoteButton`).addEventListener(`click`, newNoteButton, false);
-}
-
-
-
-/**
- * delete the note from storage.
- * @param {*} id 
- */
-function deleteNoteFromStorage(id) {    
-    notes.forEach(
-        (note, index) => {
-            if (note.id === parseInt(id)) {
-                notes.splice(index, 1);
-            }
-        }
-    );
-    localStorage.setItem("Notes", JSON.stringify(notes));
-    console.log(`deleted note ${id} from storage.`);
-}
-
-/**
- * delete note from storage and remove card.
- * @param {*} noteId 
- */
-function deleteNote(noteId) {
-    console.log(`deleting note ${noteId} from storage.`);
-    deleteNoteFromStorage(noteId);
-
-    let cardId = "noteCard-" + noteId;
-    console.log(`removing card ${cardId}.`);
-
-    if(document.getElementById(cardId)) {
-        document.getElementById(cardId).remove();
-        console.log(`card removed.`);
-    } else {
-        console.log(`card ${cardId} not found.`);
-    }
-        
-}
-
-/**
- * Delete note button click. Ask user from confirmation before deleting.
- * @param {*} buttonId 
- * @returns 
- */
-function deleteNoteFromButton(buttonId) {
-    noteId = getNoteIdFromComponentId(buttonId);
-    console.log(`delete note ${noteId} pressed. CurrentId: ${currentId}`);
-    let noteTitle = document.getElementById(`noteCardTitle-${noteId}`).innerText.toString();
-    if(confirm(`Do you want to delete ${noteTitle}?`)) {
-        if (currentId == parseInt(noteId)) {
-            setNoteTitleField("");
-            setNoteTextArea("");
-        }
-        deleteNote(noteId);
-    } else {
-        console.log(`Declined by user.`);
-        return;
-    }
-    
+    document.getElementById(`noteTextArea`).addEventListener(`keypress`, function() {
+        unsavedChanges = 1;
+    });
+    document.getElementById(`noteTitleField`).addEventListener(`keypress`, function() {
+        unsavedChanges = 1;
+    });
 }
