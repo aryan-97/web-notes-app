@@ -19,13 +19,21 @@ Below are some screenshots from app.
  <img src="https://i.imgur.com/FtaNPDt.png" height="256"> <br> *Empty text fields with placeholders.* | <img src="https://i.imgur.com/VG7Gy2o.png" height="256"> <br> *Notes list with sleek rounded corners and active note.* 
   <img src="https://i.imgur.com/VEvYkTT.png" height="256"> <br> *New note button on hover.* | <img src="https://i.imgur.com/FMaPhoIh.png" height="256"> <br> *Delete button on hover.*
 
+<br>
+<br>
+<img src="https://i.imgur.com/GqUgvGD.png">
+<br>
+*Responsive design*
 
+<br>
+<br>
 
 ## Advantages
 * Interface is easy to understand and use.
 * Lightweight with only plain text for taking quick notes.
 * Notes are store locally, not on internet.
 * Notes are stored even when browser is closed.
+* Responsive design, easy to use on any screen size.
 
 
 ## Disadvantages
