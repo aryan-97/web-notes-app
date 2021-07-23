@@ -21,9 +21,10 @@ Below are some screenshots from app.
 
 <br>
 <br>
+<center>
 <img src="https://i.imgur.com/GqUgvGD.png">
-<br>
 *Responsive design*
+</center>
 
 <br>
 <br>
